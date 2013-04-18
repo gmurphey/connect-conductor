@@ -98,5 +98,27 @@ describe('Conductor', function () {
       done();
     });
   });
+
+  it('should override routekeys with fragment of the same name', function (done) {
+    var route = conductor.route({
+      routes: {
+        '/api/:version/task/*path': '/api/v[version]/[path]',
+      },
+
+      routekeys: {
+        'version': function (req) {
+          return '2';
+        }
+      }
+    });
+
+    req.url = '/api/1/task/meetups';
+
+    route(req, res, function () {
+      req.url.should.equal('/api/v1/meetups');
+      done();
+    });
+
+  });
 });
 
