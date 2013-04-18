@@ -8,10 +8,21 @@ describe('Conductor', function () {
 
     req = {
       url: ''
-    }
+    };
   });
 
-  it('should not update the url with no routes', function (done) {
+  it('should run without options', function (done) {
+    var route = conductor.route();
+
+    req.url = '/user';
+
+    route(req, res, function () {
+      req.url.should.equal('/user');
+      done();
+    });
+  });
+
+  it('should not update the url without routes', function (done) {
     var route = conductor.route({});
 
     req.url = '/user';
@@ -40,7 +51,7 @@ describe('Conductor', function () {
   it('should redirect with wildcard routes', function (done) {
     var route = conductor.route({
       routes: {
-        '/user/*path': '/[1]'
+        '/user/*path': '/[path]'
       }
     });
 
@@ -55,7 +66,7 @@ describe('Conductor', function () {
   it('should redirect with route keys', function (done) {
     var route = conductor.route({
       routes: {
-        '/user/1/status': '/[user]/status'
+        '/status': '/[user]/status'
       },
 
       routekeys: {
@@ -65,10 +76,25 @@ describe('Conductor', function () {
       }
     });
 
-    req.url = '/user/1/status';
+    req.url = '/status';
 
     route(req, res, function () {
       req.url.should.equal('/gmurphey/status');
+      done();
+    });
+  });
+
+  it('should redirect with named fragments', function (done) {
+    var route = conductor.route({
+      routes: {
+        '/api/:version': '/[version]'
+      }
+    });
+
+    req.url = '/api/1';
+
+    route(req, res, function () {
+      req.url.should.equal('/1');
       done();
     });
   });
