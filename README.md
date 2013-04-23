@@ -10,9 +10,9 @@ Some contrived examples:
 {
   routes: {
     '/':                    '/path/to/route/to',      // static routing
-    '/assets/css/*path':    '/dist/css/[path]'        // wildcard routes
+    '/assets/css/*path':    '/dist/css/[path]',       // wildcard routes
     '/api/:version/*path':  '/api/v[version]/[path]', // named routes
-    '/assets/js/*path':     '/dist/[site]/js/[path]'  // routekey usage
+    '/assets/js/*path':     '/dist/[site]/js/[path]', // routekey usage
     '/sites/:site/*path':   '/[site]/[path]'          // override the `site` routekey for this request
   }
 
