@@ -4,26 +4,22 @@ Conductor is highly configurable routing middleware for Connect.
 
 ## Options
 
+Some contrived examples:
+
 ```javascript
 {
   routes: {
-    '/':                    '/path/to/route/to',           // static routing
-    '/assets/css/*path':    '/dist/css/[path]',          // wildcard parameters
+    '/':                    '/path/to/route/to',      // static routing
+    '/assets/css/*path':    '/dist/css/[path]'        // wildcard routes
+    '/api/:version/*path':  '/api/v[version]/[path]', // named routes
+    '/assets/js/*path':     '/dist/[site]/js/[path]'  // routekey usage
+    '/sites/:site/*path':   '/[site]/[path]'          // override the `site` routekey for this request
   }
-}
-```
 
-```javascript
-{
-  routes: {
-    'assets/css/*path': '/dist/[client]
-  },
-
+  // can be overridden for individual requests
   routekeys: {
-    'client': function (req) {
-      var
-
-      return req.hostname;
+    'site': function (request) {
+      return 'mysite';
     }
   }
 }
