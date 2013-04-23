@@ -2,6 +2,8 @@
 
 Conductor is highly configurable routing middleware for Connect.
 
+[![Build Status](https://travis-ci.org/gmurphey/connect-conductor.png?branch=master)](https://travis-ci.org/gmurphey/connect-conductor)
+
 ## Options
 
 Some contrived examples:
