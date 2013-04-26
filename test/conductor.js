@@ -1,7 +1,8 @@
-var should = require('should');
+/* global require: false, describe: false, beforeEach: false, it: false */
+require('should');
 
 describe('Conductor', function () {
-  var conductor, options, req, res;
+  var conductor, req, res;
 
   beforeEach(function () {
     conductor = require('../lib/conductor');
@@ -70,7 +71,7 @@ describe('Conductor', function () {
       },
 
       routekeys: {
-        'user': function (req) {
+        'user': function () {
           return 'gmurphey';
         }
       }
@@ -102,11 +103,11 @@ describe('Conductor', function () {
   it('should override routekeys with fragment of the same name', function (done) {
     var route = conductor.route({
       routes: {
-        '/api/:version/task/*path': '/api/v[version]/[path]',
+        '/api/:version/task/*path': '/api/v[version]/[path]'
       },
 
       routekeys: {
-        'version': function (req) {
+        'version': function () {
           return '2';
         }
       }
