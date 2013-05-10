@@ -34,6 +34,21 @@ describe('Conductor', function () {
     });
   });
 
+  it('should not update the url with non-matching routes', function (done) {
+    var route = conductor.route({
+      routes: {
+        '/api': '/api/4'
+      }
+    });
+
+    req.url = '/';
+
+    route(req, res, function () {
+      req.url.should.equal('/');
+      done();
+    });
+  });
+
   it('should redirect static routes', function (done) {
     var route = conductor.route({
       routes: {
