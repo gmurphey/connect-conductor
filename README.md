@@ -14,8 +14,8 @@ Some contrived examples:
     '/':                    '/path/to/route/to',      // static routing
     '/assets/css/*path':    '/dist/css/[path]',       // wildcard routes
     '/api/:version/*path':  '/api/v[version]/[path]', // named routes
-    '/assets/js/*path':     '/dist/[site]/js/[path]', // routekey usage
-    '/sites/:site/*path':   '/[site]/[path]'          // override the `site` routekey for this request
+    '/assets/js/*path':     '/dist/[site]/js/[path]', // `site` routekey usage
+    '/sites/:site/*path':   '/[site]/[path]'          // the `site` placeholder in the request takes precedence over routekeys
   }
 
   // can be overridden for individual requests
