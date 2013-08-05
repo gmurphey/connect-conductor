@@ -79,6 +79,36 @@ describe('Conductor', function () {
     });
   });
 
+  it('should respond to optional parameters', function (done) {
+    var route = conductor.route({
+      routes: {
+        '/user/1/status(?*params)': '/?[params]'
+      }
+    });
+
+    req.url = '/user/1/status?apikey=123';
+
+    route(req, res, function () {
+      req.url.should.equal('/?apikey=123');
+      done();
+    });
+  });
+
+  it('should respond to non-existent optional parameters', function (done) {
+    var route = conductor.route({
+      routes: {
+        '/user(?*params)': '/?[params]'
+      }
+    });
+
+    req.url = '/user';
+
+    route(req, res, function () {
+      req.url.should.equal('/?');
+      done();
+    });
+  });
+
   it('should redirect with route keys', function (done) {
     var route = conductor.route({
       routes: {
